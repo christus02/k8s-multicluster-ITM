@@ -39,7 +39,7 @@ Topology Diagram coming soon
 3. A publically available DNS domain for your application
 
 
-## Steps to setup ITM for your application
+## Steps to configure ITM for your application
 
 1. Add every Kubernetes cluster as a Platform in ITM
 2. Create an OpenMix Application in ITM
@@ -53,6 +53,57 @@ real-time stats about our cluster and perform intelligent GLB decisions.
 Navigate to the Platforms page in ITM portal and create 2 platforms. One for the cluster in Asia and another for the
 cluster in US.
 
+##### Adding Platform for Kubernetes cluster in Asia
+
+<img src="https://raw.githubusercontent.com/christus02/k8s-multicluster-ITM/master/images/platform-asia.png" width="500">
+
+##### Adding Platform for Kubernetes cluster in US
+
+<img src="https://raw.githubusercontent.com/christus02/k8s-multicluster-ITM/master/images/platform-us.png" width="500">
 
 ### Create an OpenMix Application in ITM
+
+Now that we have added our Kubernetes cluster as ITM platforms, let's create an OpenMix ITM application that actually
+takes the GLB decision. 
+
+In the ITM portal navigate to Openmix section, click "Application Configuration" and create a new Application.
+
+Fill in the details appropriately (refer below)
+
+*Step 1:*
+Protocol: DNS
+Application Type: Optimal RTT
+Name: k8s-multi-cluster
+
+Click NEXT
+
+*Step 2:*
+
+For Fallback URL, I am going to provide the public IP of VPX of India Kubernetes cluster
+
+Click NEXT
+
+*Step 3:*
+
+Add the newly created platforms to the Application
+
+In the CNAME, provide the public IP of the VPX (or public DNS of VPX if available) of the respective clusters.
+
+After adding one platform, DON'T CLICK NEXT.
+
+Click "ADD PLATFORM" and add the second cluster
+
+When you are done adding all the platforms, click NEXT
+
+*Step 4:*
+
+This is the final step. If you want to configure any weights for a platform, you can do it here. Else click COMPLETE
+
 ### Update the ITM provided CNAME for your application in your DNS server
+
+Once you have clicked COMPLETE, you would receive the CNAME for your application in the next screen.
+
+Make a note of it and configure your DNS server accordingly. In my case, Route 53 is my DNS provider. I would update the
+Route 53 to point my public domain to the CNAME provided by ITM.
+
+
