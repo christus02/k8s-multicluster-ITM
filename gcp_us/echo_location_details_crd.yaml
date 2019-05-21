@@ -1,0 +1,17 @@
+apiVersion: citrix.com/v1
+kind: rewritepolicy
+metadata:
+  name: echolocationdetails
+spec:
+  rewrite-policies:
+    - servicenames:
+        - cpx-service
+      rewrite-policy:
+        operation: replace_all
+        target: 'http.res.body(10000)'
+        modify-expression: '"<h1 style=\"color: blue\">I am responding from <span style=\"color: red;\">GKE cluster
+</span> in <span style=\"color: green;\"> US Central </span> Region</h1>"'
+        multiple-occurence-modify: "text(\"It works!\")"
+        comment: 'Respond with custom location'
+        direction: RESPONSE
+        rewrite-criteria: 'TRUE'

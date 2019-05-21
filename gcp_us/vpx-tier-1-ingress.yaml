@@ -1,0 +1,17 @@
+#Specify the ingress resource
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: vpx-tier-1-ingress
+  annotations:
+   kubernetes.io/ingress.class: "citrix-tier-1"
+spec:
+  rules:
+  - host: k8s-multicluster-itm.cloudpst.net
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: cpx-service
+          servicePort: 80
+---

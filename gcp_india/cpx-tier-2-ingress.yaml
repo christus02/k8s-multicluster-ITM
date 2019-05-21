@@ -1,0 +1,17 @@
+#Specify the ingress resource
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: cpx-tier-2-ingress
+  annotations:
+   kubernetes.io/ingress.class: "citrix-tier-2"
+spec:
+  rules:
+  - host: k8s-multicluster-itm.cloudpst.net
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: apache
+          servicePort: 80
+---
