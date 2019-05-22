@@ -58,10 +58,16 @@ spec:
            value: "HTTP"
          # Set username for Nitro
          - name: "NS_USER"
-           value: "nsroot"
+           valueFrom:
+            secretKeyRef:
+             name: nslogin
+             key: username
          # Set user password for Nitro
          - name: "NS_PASSWORD"
-           value: 'nsroot123$%^123$%^'
+           valueFrom:
+            secretKeyRef:
+             name: nslogin
+             key: password
          # Set log level
          - name: "EULA"
            value: "yes"
