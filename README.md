@@ -30,13 +30,14 @@ Currently for illustration I just have two Kubernetes cluster in GKE on differen
 
 ## Topology:
 
-Topology Diagram coming soon
+<img src="https://raw.githubusercontent.com/christus02/k8s-multicluster-ITM/master/images/multicluster-itm-topology.png" width="500">
 
 ## Pre-requisites:
 
 1. Access to Citrix ITM portal. Sign-up if you are new to Citrix ITM.
 2. Kubernetes clusters completely setup with Apps and Ingress UP and Running
 3. A publically available DNS domain for your application
+4. Publish the Application
 
 
 ## Steps to configure ITM for your application
@@ -77,11 +78,15 @@ Name: k8s-multi-cluster
 
 Click NEXT
 
+<img src="https://raw.githubusercontent.com/christus02/k8s-multicluster-ITM/master/images/step-1.png" width="500">
+
 *Step 2:*
 
 For Fallback URL, I am going to provide the public IP of VPX of India Kubernetes cluster
 
 Click NEXT
+
+<img src="https://raw.githubusercontent.com/christus02/k8s-multicluster-ITM/master/images/step-2.png" width="500">
 
 *Step 3:*
 
@@ -91,9 +96,13 @@ In the CNAME, provide the public IP of the VPX (or public DNS of VPX if availabl
 
 After adding one platform, DON'T CLICK NEXT.
 
+<img src="https://raw.githubusercontent.com/christus02/k8s-multicluster-ITM/master/images/step-3-1.png" width="500">
+
 Click "ADD PLATFORM" and add the second cluster
 
 When you are done adding all the platforms, click NEXT
+
+<img src="https://raw.githubusercontent.com/christus02/k8s-multicluster-ITM/master/images/step-3-2.png" width="500">
 
 *Step 4:*
 
@@ -106,4 +115,8 @@ Once you have clicked COMPLETE, you would receive the CNAME for your application
 Make a note of it and configure your DNS server accordingly. In my case, Route 53 is my DNS provider. I would update the
 Route 53 to point my public domain to the CNAME provided by ITM.
 
+### Publish the Application
 
+Once you have updated the CNAME in your DNS server, you can PUBLISH the newly created ITM application.
+
+<img src="https://raw.githubusercontent.com/christus02/k8s-multicluster-ITM/master/images/cname-update.png" width="500">
