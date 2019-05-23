@@ -71,7 +71,7 @@ In the ITM portal navigate to Openmix section, click "Application Configuration"
 
 Fill in the details appropriately (refer below)
 
-*Step 1:*
+**Step 1:**
 Protocol: DNS
 Application Type: Optimal RTT
 Name: k8s-multi-cluster
@@ -80,7 +80,7 @@ Click NEXT
 
 <img src="https://raw.githubusercontent.com/christus02/k8s-multicluster-ITM/master/images/step-1.png" width="500">
 
-*Step 2:*
+**Step 2:**
 
 For Fallback URL, I am going to provide the public IP of VPX of India Kubernetes cluster
 
@@ -88,7 +88,7 @@ Click NEXT
 
 <img src="https://raw.githubusercontent.com/christus02/k8s-multicluster-ITM/master/images/step-2.png" width="500">
 
-*Step 3:*
+**Step 3:**
 
 Add the newly created platforms to the Application
 
@@ -104,7 +104,7 @@ When you are done adding all the platforms, click NEXT
 
 <img src="https://raw.githubusercontent.com/christus02/k8s-multicluster-ITM/master/images/step-3-2.png" width="500">
 
-*Step 4:*
+**Step 4:**
 
 This is the final step. If you want to configure any weights for a platform, you can do it here. Else click COMPLETE
 
@@ -120,3 +120,38 @@ Route 53 to point my public domain to the CNAME provided by ITM.
 Once you have updated the CNAME in your DNS server, you can PUBLISH the newly created ITM application.
 
 <img src="https://raw.githubusercontent.com/christus02/k8s-multicluster-ITM/master/images/cname-update.png" width="500">
+
+## Testing your Hybrid Multi Cluster Application
+
+Inorder to test application, we may need users from different geo-locations of the world so that we can see that the
+users are landing on the nearest proximity sites.
+
+In my example, I have two clients: 
+1. In Bangalore, India
+2. In US
+
+If the user from India, tries to access my Application, he should land on the Kubernetes cluster that is created on GCP
+Asia Region.
+If the user from US tries to access my Application, he should land on the Kubernetes cluster that is created on GCP US
+Central Region.
+
+**Inorder to identify where the response is coming from, I have made use of our [Rewrite Responder
+CRD](https://github.com/citrix/citrix-k8s-ingress-controller/blob/master/docs/crds/rewrite-responder.md). This Rewrite
+Responder CRD would echo back the cluster location for us.**
+
+When a user from India tries to access my Application, below is the response:
+
+<img src="https://raw.githubusercontent.com/christus02/k8s-multicluster-ITM/master/images/working-India.png" width="500">
+
+When a user from US tries to access my Application, below is the response:
+
+<img src="https://raw.githubusercontent.com/christus02/k8s-multicluster-ITM/master/images/working-US.png" width="500">
+
+**We saw it working !!!**
+
+### Citrix Ingress Controller
+
+For more information on Citrix ingress controller and its features, please visit the official GitHub repo
+[citrix-k8s-ingress-controller](https://github.com/citrix/citrix-k8s-ingress-controller)
+
+### Hope this tutorial helps !!
