@@ -7,7 +7,7 @@ metadata:
    kubernetes.io/ingress.class: "citrix-tier-1"
 spec:
   rules:
-  - host: k8s-multicluster-itm.cloudpst.net
+  - host: example.test.com
     http:
       paths:
       - path: /
