@@ -30,7 +30,7 @@ Currently for illustration I just have two Kubernetes cluster in GKE on differen
 
 ## Topology:
 
-<img src="https://raw.githubusercontent.com/christus02/k8s-multicluster-ITM/master/images/multicluster-itm-topology.png" width="500">
+<img src="https://raw.githubusercontent.com/christus02/k8s-multicluster-ITM/master/images/multi-cluster-topology.png" width="500">
 
 ## Pre-requisites:
 
